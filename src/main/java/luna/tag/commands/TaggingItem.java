@@ -27,8 +27,29 @@ public class TaggingItem implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("set")) {
                     ItemStack item = new ItemStack(Material.valueOf(args[1]));
                     ItemMeta meta = item.getItemMeta();
+                    if (meta == null) {
+                        player.sendMessage(ChatColor.RED + "Unknown Item");
+                        return true;
+                    }
                     meta.setDisplayName(ChatColor.RED + "Hot Potato");
                     itemManager.setItem(player.getUniqueId(), item);
+                }
+            } else if (args.length >= 3) {
+                if (args[0].equalsIgnoreCase("name")) {
+                    ItemStack item = itemManager.getItem(player.getUniqueId());
+                    ItemMeta meta = item.getItemMeta();
+                    if (meta == null) {
+                        player.sendMessage(ChatColor.RED + "Unknown Item");
+                        return true;
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    for (String arg : args) {
+                        if (!arg.equalsIgnoreCase("name")) {
+                            sb.append(arg).append(" ");
+                        }
+                    }
+                    meta.setDisplayName(sb.toString().replaceAll("&", "§"));
+                    return true;
                 }
             }
         }

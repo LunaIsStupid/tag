@@ -13,7 +13,7 @@ public class TaggingItemCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         if (commandSender.hasPermission("tag.item")) {
             if (commandSender instanceof Player) {
                 if (args.length == 1) {
@@ -25,8 +25,10 @@ public class TaggingItemCompleter implements TabCompleter {
                     for (Material material : Material.values()) {
                         list.add(material.name().toLowerCase());
                     }
-                } else {
+                } else if (!args[0].equals("name")) {
                     list.add("stop it");
+                } else {
+                    list.add("<name>");
                 }
             }
         }
