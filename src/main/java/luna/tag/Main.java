@@ -2,6 +2,8 @@ package luna.tag;
 
 import luna.tag.commands.TaggingItem;
 import luna.tag.commands.completers.TaggingItemCompleter;
+import luna.tag.events.TagEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +16,7 @@ public final class Main extends JavaPlugin {
         this.reloadConfig();
         getCommand("taggingitem").setExecutor(new TaggingItem());
         getCommand("taggingitem").setTabCompleter(new TaggingItemCompleter());
+        Bukkit.getServer().getPluginManager().registerEvents(new TagEvent(), this);
     }
 
     @Override
