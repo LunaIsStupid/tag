@@ -2,3 +2,7 @@ name: Tag
 version: '1.0-SNAPSHOT'
 main: luna.tag.Main
 api-version: '1.21'
+commands:
+  taggingitem:
+    usage: use it
+    description: use it
