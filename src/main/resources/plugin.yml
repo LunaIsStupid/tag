@@ -6,3 +6,6 @@ commands:
   taggingitem:
     usage: use it
     description: use it
+  spoon:
+    usage: spoon
+    description: spoon
