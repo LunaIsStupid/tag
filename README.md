@@ -3,6 +3,6 @@
 minecraft tag plugin (wip)
 
 # tbh this sucks you shouldnt use it
-#### current status: untested
+#### current status: partially tested; havent finished game code :+1:
 
 ###### *hot taters
