@@ -1,7 +1,7 @@
 package luna.tag.management;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class GameManagement {
@@ -16,6 +16,8 @@ public class GameManagement {
     private int instanceCounter;
     private static volatile GameManagement instance;
     private GameManagement() {
+        players = new ArrayList<>();
+        losers = new ArrayList<>();
         instanceCounter++;
         gameOngoing = false;
     }

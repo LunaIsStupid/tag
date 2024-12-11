@@ -9,3 +9,6 @@ commands:
   spoon:
     usage: spoon
     description: spoon
+  game:
+    usage: /<command> <start/end> [<hotpotato>]
+    description: Start the game, or end it.

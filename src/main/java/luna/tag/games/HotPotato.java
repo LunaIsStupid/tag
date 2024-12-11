@@ -1,5 +1,6 @@
 package luna.tag.games;
 
+import luna.tag.games.common.Countdown;
 import luna.tag.games.common.RoundTimer;
 import luna.tag.management.GameManagement;
 import luna.tag.management.ItemManager;
@@ -59,6 +60,10 @@ public class HotPotato {
             }
             timer.setTimer(45);
             timer.start();
+        } else {
+            gameManagement.setGameName("HotPotato");
+            gameManagement.setGameOngoing(true);
+            new Countdown().start();
         }
     }
 
@@ -79,6 +84,7 @@ public class HotPotato {
             gameManagement.clearPlayers();
             gameManagement.clearLosers();
             timer.stop();
+            gameManagement.setGameOngoing(false);
         }
     }
 

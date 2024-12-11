@@ -1,5 +1,6 @@
 package luna.tag.games.common;
 
+import luna.tag.Main;
 import luna.tag.games.HotPotato;
 import luna.tag.management.GameManagement;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,6 +45,7 @@ public class RoundTimer {
                 }
             }
         };
+        task.runTaskTimer(Main.getPlugin(Main.class), 0, 20);
     }
 
     public void stop() {
