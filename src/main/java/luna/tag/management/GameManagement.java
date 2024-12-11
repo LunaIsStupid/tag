@@ -3,6 +3,8 @@ package luna.tag.management;
 public class GameManagement {
     // placeholder
     private boolean gameOngoing;
+    private String gameName;
+
     private int instanceCounter;
     private static volatile GameManagement instance;
     private GameManagement() {
@@ -22,5 +24,12 @@ public class GameManagement {
 
     public void setGameOngoing(Boolean gameOngoing) {
         this.gameOngoing = gameOngoing;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 }
