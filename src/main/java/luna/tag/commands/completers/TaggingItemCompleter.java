@@ -33,7 +33,6 @@ public class TaggingItemCompleter implements TabCompleter {
                 }
             }
         }
-
         return list;
     }
 }

@@ -6,7 +6,6 @@ import luna.tag.management.GameManagement;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class RoundTimer {
-    // placeholder
     private int instanceCount;
     private static volatile RoundTimer instance;
     public static RoundTimer getInstance() {

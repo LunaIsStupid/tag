@@ -6,8 +6,7 @@ import luna.tag.commands.TaggingItem;
 import luna.tag.commands.completers.GameCompleter;
 import luna.tag.commands.completers.TaggingItemCompleter;
 import luna.tag.events.TagEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
