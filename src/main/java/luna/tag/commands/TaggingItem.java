@@ -25,14 +25,26 @@ public class TaggingItem implements CommandExecutor {
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("set")) {
-                    ItemStack item = new ItemStack(Material.valueOf(args[1]));
+                    ItemStack item = new ItemStack(Material.valueOf(args[1].toUpperCase()));
                     ItemMeta meta = item.getItemMeta();
                     if (meta == null) {
                         player.sendMessage(ChatColor.RED + "Unknown Item");
                         return true;
                     }
-                    meta.setDisplayName(ChatColor.RED + "Hot Potato");
+                    meta.setDisplayName(itemManager.getItem(player.getUniqueId()).getItemMeta().getDisplayName());
                     itemManager.setItem(player.getUniqueId(), item);
+                    return true;
+                } else if (args[0].equalsIgnoreCase("name")) {
+                    ItemStack item = itemManager.getItem(player.getUniqueId());
+                    ItemMeta meta = item.getItemMeta();
+                    if (meta == null) {
+                        player.sendMessage(ChatColor.RED + "Unknown Item");
+                        return true;
+                    }
+                    meta.setDisplayName(args[1].replaceAll("&", "§"));
+                    item.setItemMeta(meta);
+                    itemManager.setItem(player.getUniqueId(), item);
+                    return true;
                 }
             } else if (args.length >= 3) {
                 if (args[0].equalsIgnoreCase("name")) {
@@ -49,6 +61,8 @@ public class TaggingItem implements CommandExecutor {
                         }
                     }
                     meta.setDisplayName(sb.toString().replaceAll("&", "§"));
+                    item.setItemMeta(meta);
+                    itemManager.setItem(player.getUniqueId(), item);
                     return true;
                 }
             }

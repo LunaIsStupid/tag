@@ -19,11 +19,12 @@ public class TaggingItemCompleter implements TabCompleter {
                 if (args.length == 1) {
                     list.add("set");
                     list.add("get");
-                    // for now name is ignored cuz im lazy
                     list.add("name");
                 } else if (args.length == 2) {
-                    for (Material material : Material.values()) {
-                        list.add(material.name().toLowerCase());
+                    if (args[0].equalsIgnoreCase("set")) {
+                        for (Material material : Material.values()) {
+                            list.add(material.name().toLowerCase());
+                        }
                     }
                 } else if (!args[0].equals("name")) {
                     list.add("stop it");

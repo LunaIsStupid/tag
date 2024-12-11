@@ -3,6 +3,6 @@
 minecraft tag plugin (wip)
 
 # tbh this sucks you shouldnt use it
-#### current status: partially tested; havent finished game code :+1:
+#### current status: werks; tho i havent seen if it works with >2 players
 
 ###### *hot taters
