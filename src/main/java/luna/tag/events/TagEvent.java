@@ -25,9 +25,10 @@ public class TagEvent implements Listener {
                     if (damager.getEquipment().getItemInMainHand().isSimilar(im.getItem(damager.getUniqueId()))) {
                         damager.getEquipment().setItemInMainHand(new ItemStack(Material.AIR));
                         damaged.getEquipment().setItemInMainHand(im.getItem(damaged.getUniqueId()));
-                        Vector launchDirection = damaged.getLocation().getDirection();
+                        Vector launchDirection = damager.getLocation().getDirection();
                         launchDirection.multiply(1.7);
                         launchDirection.setY(0.4);
+                        damaged.setVelocity(launchDirection);
                     }
                 }
             }
