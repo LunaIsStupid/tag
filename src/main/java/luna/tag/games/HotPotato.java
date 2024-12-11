@@ -1,11 +1,17 @@
 package luna.tag.games;
 
+import luna.tag.games.common.RoundTimer;
+import luna.tag.management.GameManagement;
 import luna.tag.management.ItemManager;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+
+import java.util.Random;
+import java.util.UUID;
 
 public class HotPotato {
     private int instanceCount;
@@ -19,13 +25,61 @@ public class HotPotato {
     }
 
     private ItemManager itemManager = ItemManager.getInstance();
+    private GameManagement gameManagement = GameManagement.getInstance();
+    RoundTimer timer = RoundTimer.getInstance();
 
-    public void startGame() {
+    public void startRound(String go) {
         // placeholder
+        if (go.equalsIgnoreCase("continue")) {
+            gameManagement.clearPlayers();
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.getInventory().clear();
+            }
+            Player[] OnlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]);
+            for (UUID list: gameManagement.getLosers()) {
+                Player toBeRemoved = Bukkit.getPlayer(list);
+                for (int i=0; i<OnlinePlayers.length; i++) {
+                    Player p = OnlinePlayers[i];
+                    if (p.getGameMode().equals(GameMode.SPECTATOR)) { OnlinePlayers[i].remove(); }
+                    if (p == toBeRemoved) continue;
+                    OnlinePlayers[i].remove();
+                }
+            }
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(OnlinePlayers.length);
+            Player tagger1 = OnlinePlayers[randomIndex];
+            tagger1.getEquipment().setItemInMainHand(ItemManager.getInstance().getItem(tagger1.getUniqueId()));
+            if (OnlinePlayers.length >= 5) {
+                randomIndex = rand.nextInt(OnlinePlayers.length);
+                Player tagger2 = OnlinePlayers[randomIndex];
+                tagger2.getEquipment().setItemInMainHand(ItemManager.getInstance().getItem(tagger2.getUniqueId()));
+            }
+            for (Player p : OnlinePlayers) {
+                gameManagement.addPlayer(p.getUniqueId());
+            }
+            timer.setTimer(45);
+            timer.start();
+        }
     }
 
-    public void stopGame() {
-        // placeholder
+    public void stopRound() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getInventory().containsAtLeast(itemManager.getItem(player.getUniqueId()), 1)) {
+                gameManagement.addLoser(player.getUniqueId());
+            }
+        }
+        if (gameManagement.getLosers().size() != gameManagement.getPlayers().size() -1) {
+            startRound("continue");
+        } else {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (!gameManagement.getLosers().contains(player.getUniqueId())) {
+                    Bukkit.broadcastMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.GREEN + " WINS!!!");
+                }
+            }
+            gameManagement.clearPlayers();
+            gameManagement.clearLosers();
+            timer.stop();
+        }
     }
 
     public void updateGame(int time) {

@@ -32,6 +32,9 @@ public class RoundTimer {
         task = new BukkitRunnable() {
             public void run() {
                 if (time == 0) {
+                    if (gm.getGameName().equalsIgnoreCase("HotPotato")) {
+                        HotPotato.getInstance().stopRound();
+                    }
                     this.cancel();
                 } else {
                     if (gm.getGameName().equalsIgnoreCase("HotPotato")) {
@@ -43,9 +46,8 @@ public class RoundTimer {
         };
     }
 
-    public boolean stop() {
+    public void stop() {
         task.cancel();
         time = 0;
-        return task.isCancelled();
     }
 }
