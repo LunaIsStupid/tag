@@ -1,5 +1,6 @@
 package luna.tag;
 
+import luna.tag.commands.SetDebug;
 import luna.tag.commands.TaggingItem;
 import luna.tag.commands.completers.TaggingItemCompleter;
 import luna.tag.events.TagEvent;
@@ -15,8 +16,9 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         this.reloadConfig();
         getCommand("taggingitem").setExecutor(new TaggingItem());
+        getCommand("spoon").setExecutor(new SetDebug());
         getCommand("taggingitem").setTabCompleter(new TaggingItemCompleter());
-        Bukkit.getServer().getPluginManager().registerEvents(new TagEvent(), this);
+        getServer().getPluginManager().registerEvents(new TagEvent(), this);
     }
 
     @Override
