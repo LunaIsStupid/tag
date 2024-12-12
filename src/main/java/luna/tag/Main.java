@@ -1,8 +1,6 @@
 package luna.tag;
 
-import luna.tag.commands.Game;
-import luna.tag.commands.SetDebug;
-import luna.tag.commands.TaggingItem;
+import luna.tag.commands.*;
 import luna.tag.commands.completers.GameCompleter;
 import luna.tag.commands.completers.TaggingItemCompleter;
 import luna.tag.events.TagEvent;
@@ -19,6 +17,8 @@ public final class Main extends JavaPlugin {
         getCommand("taggingitem").setExecutor(new TaggingItem());
         getCommand("spoon").setExecutor(new SetDebug());
         getCommand("game").setExecutor(new Game());
+        getCommand("spawn").setExecutor(new Spawn());
+        getCommand("spawn").setExecutor(new Map());
         getCommand("game").setTabCompleter(new GameCompleter());
         getCommand("taggingitem").setTabCompleter(new TaggingItemCompleter());
 

@@ -12,3 +12,9 @@ commands:
   game:
     usage: /<command> <start/end> [<hotpotato>]
     description: Start the game, or end it.
+  spawn:
+    usage: /<command> [<set>] [<map name>]
+    description: Go to spawn, or set a spawn.
+  map:
+    usage: /<command> [<set/add/remove/randomize>] [<name>]
+    description: Set, remove, add, or randomize the current map.
