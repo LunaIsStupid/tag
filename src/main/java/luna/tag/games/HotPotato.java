@@ -1,9 +1,12 @@
 package luna.tag.games;
 
+import luna.tag.Main;
 import luna.tag.games.common.Countdown;
 import luna.tag.games.common.RoundTimer;
 import luna.tag.management.GameManagement;
 import luna.tag.management.ItemManager;
+import luna.tag.management.MapManager;
+import luna.tag.management.SpawnManagement;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -11,6 +14,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -57,6 +61,9 @@ public class HotPotato {
             }
             for (Player p : OnlinePlayers) {
                 gameManagement.addPlayer(p.getUniqueId());
+                if (!Main.getPlugin(Main.class).getConfig().getBoolean("debug")) {
+                    SpawnManagement.getInstance(new MapManager().getCurrentMapName()).getRandomSpawn();
+                }
             }
             timer.setTimer(45);
             timer.start();
@@ -71,6 +78,9 @@ public class HotPotato {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getInventory().containsAtLeast(itemManager.getItem(player.getUniqueId()), 1)) {
                 gameManagement.addLoser(player.getUniqueId());
+            }
+            if (!Main.getPlugin(Main.class).getConfig().getBoolean("debug")) {
+                SpawnManagement.getInstance(new MapManager().getCurrentMapName()).getDefaultSpawn(new MapManager().getCurrentMapName());
             }
         }
         if (gameManagement.getLosers().size() != gameManagement.getPlayers().size() -1) {
