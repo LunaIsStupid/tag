@@ -2,6 +2,7 @@ package luna.tag.commands;
 
 import luna.tag.management.MapManager;
 import luna.tag.management.SpawnManagement;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -21,6 +22,9 @@ public class Map implements CommandExecutor {
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("set")) {
                 mapManager.setCurrentMap(args[1]);
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    p.teleport(spawnManager.getDefaultSpawn(mapManager.getCurrentMapName()));
+                }
                 sender.sendMessage(ChatColor.GREEN + "Current map: " + mapManager.getCurrentMapName());
                 return true;
             } else if (args[0].equalsIgnoreCase("remove")) {
@@ -34,6 +38,13 @@ public class Map implements CommandExecutor {
                         return true;
                     }
                 }
+            } else if (args[0].equalsIgnoreCase("randomize")) {
+                mapManager.setCurrentMap(mapManager.getRandomMap().getItemMeta().getDisplayName());
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    p.teleport(spawnManager.getDefaultSpawn(mapManager.getCurrentMapName()));
+                }
+                sender.sendMessage(ChatColor.GREEN + "Current map: " + mapManager.getCurrentMapName());
+                return true;
             }
         }
         return false;
