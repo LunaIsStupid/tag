@@ -43,6 +43,8 @@ public class SpawnManagement {
 
     public void removeSpawn(String spawn) {
         spawns.remove(spawn);
+        config.createSection("spawns", spawns);
+        Main.getPlugin(Main.class).saveConfig();
     }
 
     public Location getRandomSpawn() {
@@ -58,6 +60,8 @@ public class SpawnManagement {
 
     public void setDefaultSpawn(Location location) {
         spawns.put("default", location);
+        config.createSection("spawns", spawns);
+        Main.getPlugin(Main.class).saveConfig();
     }
 
     public Location getDefaultSpawn() {
