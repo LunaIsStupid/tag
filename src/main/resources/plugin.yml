@@ -18,3 +18,6 @@ commands:
   map:
     usage: /<command> [<set/add/remove/randomize>] [<name>]
     description: Set, remove, add, or randomize the current map.
+  firework:
+    usage: /<command> <set> <color1> [<color2>] [<color3>]
+    description: Set firework color

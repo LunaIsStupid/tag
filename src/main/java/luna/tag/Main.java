@@ -1,6 +1,7 @@
 package luna.tag;
 
 import luna.tag.commands.*;
+import luna.tag.commands.completers.FireworkCompleter;
 import luna.tag.commands.completers.GameCompleter;
 import luna.tag.commands.completers.TaggingItemCompleter;
 import luna.tag.events.TagEvent;
@@ -19,8 +20,10 @@ public final class Main extends JavaPlugin {
         getCommand("game").setExecutor(new Game());
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("spawn").setExecutor(new Map());
+        getCommand("firework").setExecutor(new Firework());
         getCommand("game").setTabCompleter(new GameCompleter());
         getCommand("taggingitem").setTabCompleter(new TaggingItemCompleter());
+        getCommand("firework").setTabCompleter(new FireworkCompleter());
 
         getServer().getPluginManager().registerEvents(new TagEvent(), this);
     }

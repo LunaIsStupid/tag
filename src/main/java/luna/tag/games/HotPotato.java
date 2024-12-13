@@ -3,16 +3,17 @@ package luna.tag.games;
 import luna.tag.Main;
 import luna.tag.games.common.Countdown;
 import luna.tag.games.common.RoundTimer;
-import luna.tag.management.GameManagement;
-import luna.tag.management.ItemManager;
-import luna.tag.management.MapManager;
-import luna.tag.management.SpawnManagement;
+import luna.tag.management.*;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.FireworkMeta;
 
 import java.util.Map;
 import java.util.Random;
@@ -31,10 +32,10 @@ public class HotPotato {
 
     private ItemManager itemManager = ItemManager.getInstance();
     private GameManagement gameManagement = GameManagement.getInstance();
+    FireworkManagement fireworkManagement = new FireworkManagement();
     RoundTimer timer = RoundTimer.getInstance();
 
     public void startRound(String go) {
-        // placeholder
         if (go.equalsIgnoreCase("continue")) {
             gameManagement.clearPlayers();
             for (Player p : Bukkit.getOnlinePlayers()) {
@@ -77,6 +78,14 @@ public class HotPotato {
     public void stopRound() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getInventory().containsAtLeast(itemManager.getItem(player.getUniqueId()), 1)) {
+                Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
+                FireworkEffect fireworkEffect = fireworkManagement.getFirework(player.getUniqueId());
+                FireworkMeta data = firework.getFireworkMeta();
+                data.clearEffects();
+                data.addEffect(fireworkEffect);
+                data.setPower(1);
+                firework.setFireworkMeta(data);
+                firework.detonate();
                 gameManagement.addLoser(player.getUniqueId());
             }
             if (!Main.getPlugin(Main.class).getConfig().getBoolean("debug")) {

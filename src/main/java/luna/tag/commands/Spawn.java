@@ -14,6 +14,7 @@ public class Spawn implements CommandExecutor {
     private MapManager mapManager = new MapManager();
     private SpawnManagement spawnManager = SpawnManagement.getInstance(mapManager.getCurrentMapName());
 
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length == 0) {
