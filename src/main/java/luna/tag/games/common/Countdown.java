@@ -20,11 +20,7 @@ public class Countdown {
                         p.sendTitle(ChatColor.BLUE + "T" + ChatColor.AQUA + "A" + ChatColor.BLUE + "G" + ChatColor.AQUA + "!", "", 2, 5,2);
                     }
                     if (game.getGameName().equalsIgnoreCase("HotPotato")) {
-                        try {
-                            HotPotato.getInstance().startRound("continue");
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
+                        HotPotato.getInstance().startRound("continue");
                     }
                     this.cancel();
                 } else if (time == 1) {

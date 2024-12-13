@@ -16,11 +16,7 @@ public class Game implements CommandExecutor {
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("start")) {
                 if (args[1].equalsIgnoreCase("hotpotato")) {
-                    try {
-                        HotPotato.getInstance().startRound("no");
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    HotPotato.getInstance().startRound("no");
                     return true;
                 } else {
                     return false;
@@ -29,11 +25,7 @@ public class Game implements CommandExecutor {
             return true;
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("start")) {
-                try {
-                    HotPotato.getInstance().startRound("no");
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                HotPotato.getInstance().startRound("no");
             } else {
                 if (gm.getGameName().equalsIgnoreCase("HotPotato")) {
                     RoundTimer.getInstance().stop();
