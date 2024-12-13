@@ -41,10 +41,10 @@ public class FireworkManagement {
         firework.with(FireworkEffect.Type.BALL_LARGE);
         if (config.getConfigurationSection("fireworks") != null) {
             Map<String, Object> fwcolors = config.getConfigurationSection("fireworks").getValues(false);
-            if (fwcolors.get(id.toString() + ".color1") != null) {
-                firework.withColor((Color) fwcolors.get(id.toString() + ".color1"));
-                firework.withColor((Color) fwcolors.get(id.toString() + ".color2"));
-                firework.withColor((Color) fwcolors.get(id.toString() + ".color3"));
+            if (config.getColor("fireworks." + id.toString() + ".color1") != null) {
+                firework.withColor(config.getColor("fireworks." + id.toString() + ".color1"));
+                firework.withColor(config.getColor("fireworks." + id.toString() + ".color2"));
+                firework.withColor(config.getColor("fireworks." + id.toString() + ".color3"));
             } else {
                 firework.withColor(colors.get("RED"));
                 firework.withColor(colors.get("LIME"));
@@ -64,6 +64,7 @@ public class FireworkManagement {
     public void setFirework(UUID id, String colorID, String color) throws Exception {
         Map<String, Object> fwcolors;
         boolean passed = false;
+        boolean passed2 = false;
         if (config.getConfigurationSection("fireworks") != null) {
             fwcolors = config.getConfigurationSection("fireworks").getValues(false);
         } else {
@@ -77,6 +78,7 @@ public class FireworkManagement {
                         passed = true;
                     }
                 }
+                passed2 = true;
             }
             case "color2" -> {
                 for (String key : colors.keySet()) {
@@ -85,6 +87,7 @@ public class FireworkManagement {
                         passed = true;
                     }
                 }
+                passed2 = true;
             }
             case "color3" -> {
                 for (String key : colors.keySet()) {
@@ -93,10 +96,14 @@ public class FireworkManagement {
                         passed = true;
                     }
                 }
+                passed2 = true;
             }
         }
         if (!passed) {
-            throw new Exception("Invalid color " + colorID);
+            throw new Exception("Invalid color: " + color);
+        }
+        if (!passed2) {
+            throw new Exception("Invalid color ID: " + colorID);
         }
         config.createSection("fireworks", fwcolors);
         Main.getPlugin(Main.class).saveConfig();

@@ -14,6 +14,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         saveDefaultConfig();
+        this.getConfig().options().copyDefaults(true);
         this.reloadConfig();
         getCommand("taggingitem").setExecutor(new TaggingItem());
         getCommand("spoon").setExecutor(new SetDebug());
