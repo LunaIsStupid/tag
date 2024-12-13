@@ -18,8 +18,6 @@ public final class Main extends JavaPlugin {
         getCommand("taggingitem").setExecutor(new TaggingItem());
         getCommand("spoon").setExecutor(new SetDebug());
         getCommand("game").setExecutor(new Game());
-        getCommand("spawn").setExecutor(new Spawn());
-        getCommand("spawn").setExecutor(new Map());
         getCommand("firework").setExecutor(new Firework());
         getCommand("game").setTabCompleter(new GameCompleter());
         getCommand("taggingitem").setTabCompleter(new TaggingItemCompleter());

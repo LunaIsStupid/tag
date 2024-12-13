@@ -62,9 +62,6 @@ public class HotPotato {
             }
             for (Player p : OnlinePlayers) {
                 gameManagement.addPlayer(p.getUniqueId());
-                if (!Main.getPlugin(Main.class).getConfig().getBoolean("debug")) {
-                    SpawnManagement.getInstance(new MapManager().getCurrentMapName()).getRandomSpawn();
-                }
             }
             timer.setTimer(45);
             timer.start();
@@ -87,9 +84,6 @@ public class HotPotato {
                 firework.setFireworkMeta(data);
                 firework.detonate();
                 gameManagement.addLoser(player.getUniqueId());
-            }
-            if (!Main.getPlugin(Main.class).getConfig().getBoolean("debug")) {
-                SpawnManagement.getInstance(new MapManager().getCurrentMapName()).getDefaultSpawn(new MapManager().getCurrentMapName());
             }
         }
         if (gameManagement.getLosers().size() != gameManagement.getPlayers().size() -1) {
